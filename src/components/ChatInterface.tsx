@@ -4,7 +4,7 @@ import { ChatInput } from "./ChatInput";
 import { ChatMessage, TypingIndicator } from "./ChatMessage";
 import { queryLoungeInfo, ChatMessage as ChatMessageType } from "@/services/aiService";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Plane, Clock, Wifi, Coffee, Utensils, Shower, LucideIcon } from "lucide-react";
+import { Plane, Clock, Wifi, Coffee, Utensils, Bath, LucideIcon } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
@@ -18,7 +18,7 @@ const amenityWidgets: AmenityWidget[] = [
   { icon: Wifi, label: "Free WiFi", color: "bg-blue-500" },
   { icon: Coffee, label: "Premium Drinks", color: "bg-amber-600" },
   { icon: Utensils, label: "Buffet", color: "bg-green-600" },
-  { icon: Shower, label: "Shower Facilities", color: "bg-purple-600" },
+  { icon: Bath, label: "Shower Facilities", color: "bg-purple-600" },
   { icon: Clock, label: "24/7 Access", color: "bg-red-500" },
 ];
 
