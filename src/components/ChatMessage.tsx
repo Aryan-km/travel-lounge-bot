@@ -15,15 +15,15 @@ export function ChatMessage({ content, isUser, timestamp = new Date() }: ChatMes
   return (
     <div className={cn("flex mb-4", isUser ? "justify-end" : "justify-start")}>
       {!isUser && (
-        <div className="w-8 h-8 rounded-full bg-lounge-gradient flex items-center justify-center mr-2 flex-shrink-0">
-          <PlaneIcon className="h-4 w-4 text-white" />
+        <div className="w-10 h-10 rounded-full bg-lounge-gradient flex items-center justify-center mr-2 flex-shrink-0 shadow-md">
+          <PlaneIcon className="h-5 w-5 text-white" />
         </div>
       )}
       
       <div className={cn(
         "max-w-[85%]",
         isUser ? "user-bubble" : "bot-bubble",
-        isUser ? "bg-gradient-to-r from-primary to-lounge-blue" : "bg-card"
+        isUser ? "bg-gradient-to-r from-primary to-lounge.blue" : "bg-card"
       )}>
         <div className="whitespace-pre-wrap">{content}</div>
         <div className={cn("text-xs mt-1 text-right", 
@@ -33,8 +33,8 @@ export function ChatMessage({ content, isUser, timestamp = new Date() }: ChatMes
       </div>
       
       {isUser && (
-        <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-2 flex-shrink-0">
-          <MessageCircle className="h-4 w-4 text-white" />
+        <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center ml-2 flex-shrink-0 shadow-md">
+          <MessageCircle className="h-5 w-5 text-white" />
         </div>
       )}
     </div>
@@ -44,8 +44,8 @@ export function ChatMessage({ content, isUser, timestamp = new Date() }: ChatMes
 export function TypingIndicator() {
   return (
     <div className="flex mb-4">
-      <div className="w-8 h-8 rounded-full bg-lounge-gradient flex items-center justify-center mr-2">
-        <PlaneIcon className="h-4 w-4 text-white" />
+      <div className="w-10 h-10 rounded-full bg-lounge-gradient flex items-center justify-center mr-2 shadow-md">
+        <PlaneIcon className="h-5 w-5 text-white" />
       </div>
       <div className="bot-bubble !py-2.5">
         <div className="typing-indicator">
