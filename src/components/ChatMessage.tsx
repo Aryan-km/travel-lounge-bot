@@ -30,7 +30,11 @@ export function ChatMessage({ content, isUser, timestamp = new Date() }: ChatMes
           <div className="whitespace-pre-wrap">{content}</div>
         ) : (
           <div className="prose prose-sm dark:prose-invert max-w-none">
-            <ReactMarkdown>{content}</ReactMarkdown>
+            <ReactMarkdown components={{
+              // Allow HTML in markdown
+              p: ({ node, ...props }) => <p {...props} />,
+              strong: ({ node, ...props }) => <strong className="font-bold" {...props} />,
+            }}>{content}</ReactMarkdown>
           </div>
         )}
         <div className={cn("text-xs mt-1 text-right", 
