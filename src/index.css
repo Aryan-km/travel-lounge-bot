@@ -97,15 +97,15 @@
 
 @layer components {
   .chat-bubble {
-    @apply rounded-2xl p-4 max-w-[85%] animate-slide-up;
+    @apply rounded-2xl p-4 max-w-[85%] animate-slide-up shadow-sm;
   }
   
   .user-bubble {
-    @apply chat-bubble bg-primary text-primary-foreground ml-auto;
+    @apply chat-bubble text-primary-foreground ml-auto;
   }
   
   .bot-bubble {
-    @apply chat-bubble bg-card border shadow-sm;
+    @apply chat-bubble bg-card border;
   }
   
   .typing-indicator span {

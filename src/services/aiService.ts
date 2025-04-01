@@ -1,6 +1,6 @@
 
 // API key will be hardcoded here - replace the placeholder with your actual key
-const API_KEY = "YOUR_API_KEY_HERE"; // IMPORTANT: Replace this with your actual API key
+const API_KEY = "AIzaSyBG88Dc6spqDia9kseXyitK91ht2cQtNZI"; // API key has been added
 
 // This is just a sample of what a lounge information response might look like
 const SAMPLE_LOUNGES = [

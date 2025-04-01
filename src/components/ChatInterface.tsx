@@ -3,6 +3,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { ChatInput } from "./ChatInput";
 import { ChatMessage, TypingIndicator } from "./ChatMessage";
 import { queryLoungeInfo, ChatMessage as ChatMessageType } from "@/services/aiService";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Plane } from "lucide-react";
 
 export function ChatInterface() {
   const [messages, setMessages] = useState<ChatMessageType[]>([
@@ -65,22 +67,33 @@ export function ChatInterface() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex-1 overflow-y-auto px-4 py-6">
-        <div className="max-w-3xl mx-auto">
-          {messages.map((message, index) => (
-            <ChatMessage
-              key={index}
-              content={message.content}
-              isUser={message.isUser}
-              timestamp={message.timestamp}
-            />
-          ))}
-          {isLoading && <TypingIndicator />}
-          <div ref={messagesEndRef} />
-        </div>
+      <div className="flex-1 overflow-hidden px-4 py-6">
+        <ScrollArea className="h-full pr-4">
+          <div className="max-w-3xl mx-auto space-y-4">
+            <div className="flex items-center justify-center my-2">
+              <div className="bg-lounge-gradient p-1.5 rounded-full">
+                <Plane className="h-5 w-5 text-white" />
+              </div>
+              <div className="text-xs text-muted-foreground bg-accent/50 rounded-full px-3 py-1 ml-2">
+                Lounge information updated daily
+              </div>
+            </div>
+            
+            {messages.map((message, index) => (
+              <ChatMessage
+                key={index}
+                content={message.content}
+                isUser={message.isUser}
+                timestamp={message.timestamp}
+              />
+            ))}
+            {isLoading && <TypingIndicator />}
+            <div ref={messagesEndRef} />
+          </div>
+        </ScrollArea>
       </div>
       
-      <div className="p-4 border-t bg-background/80 backdrop-blur-sm">
+      <div className="p-4 border-t bg-background/80 backdrop-blur-sm sticky bottom-0">
         <div className="max-w-3xl mx-auto">
           <ChatInput onSendMessage={handleSendMessage} isDisabled={isLoading} />
         </div>
