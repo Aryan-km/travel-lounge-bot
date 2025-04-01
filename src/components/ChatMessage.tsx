@@ -2,6 +2,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { PlaneIcon, MessageCircle } from "lucide-react"; 
+import ReactMarkdown from "react-markdown";
 
 type ChatMessageProps = {
   content: string;
@@ -25,7 +26,13 @@ export function ChatMessage({ content, isUser, timestamp = new Date() }: ChatMes
         isUser ? "user-bubble" : "bot-bubble",
         isUser ? "bg-gradient-to-r from-primary to-lounge.blue" : "bg-card"
       )}>
-        <div className="whitespace-pre-wrap">{content}</div>
+        {isUser ? (
+          <div className="whitespace-pre-wrap">{content}</div>
+        ) : (
+          <div className="prose prose-sm dark:prose-invert max-w-none">
+            <ReactMarkdown>{content}</ReactMarkdown>
+          </div>
+        )}
         <div className={cn("text-xs mt-1 text-right", 
           isUser ? "text-primary-foreground/70" : "text-muted-foreground")}>
           {timeString}

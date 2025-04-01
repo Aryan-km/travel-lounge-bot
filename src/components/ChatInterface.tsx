@@ -25,7 +25,7 @@ const amenityWidgets: AmenityWidget[] = [
 export function ChatInterface() {
   const [messages, setMessages] = useState<ChatMessageType[]>([
     {
-      content: "👋 Hello! I'm your Airport Lounge Assistant. Ask me about airport lounges around the world, access requirements, amenities, or anything else lounge-related!",
+      content: "👋 Hello! I'm your Airport Lounge Assistant. Ask me about airport lounges around the world, access requirements, amenities, or anything else lounge-related! Try asking about lounges at a specific airport like 'What lounges are at Heathrow Airport?' or 'Tell me about lounges at Indira Gandhi Airport'.",
       isUser: false,
       timestamp: new Date()
     }
