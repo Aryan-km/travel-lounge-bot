@@ -1,12 +1,29 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { ChatInterface } from "@/components/ChatInterface";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen flex flex-col">
+      <header className="border-b bg-card/80 backdrop-blur-sm p-4 relative z-10">
+        <div className="max-w-3xl mx-auto flex items-center">
+          <div className="flex items-center space-x-2">
+            <div className="h-8 w-8 rounded-full bg-lounge-gradient flex items-center justify-center text-white font-bold">
+              L
+            </div>
+            <h1 className="font-semibold text-xl">Lounge Finder</h1>
+          </div>
+          <div className="ml-auto text-sm text-muted-foreground">
+            Your Airport Lounge Assistant
+          </div>
+        </div>
+      </header>
+      
+      <main className="flex-1 flex flex-col">
+        <ChatInterface />
+      </main>
+      
+      <ThemeToggle />
     </div>
   );
 };
