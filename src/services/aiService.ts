@@ -21,7 +21,7 @@ export async function queryLoungeInfo(prompt: string): Promise<string> {
     - Hours of operation
     - Ratings if available
     
-    Format the response in well-structured Markdown with proper headings, bullet points, and bold text. DO NOT use asterisks for bold text, use HTML <strong> tags instead. Make the response comprehensive and well-organized.`;
+    Format the response in well-structured Markdown with proper headings, bullet points, and bold text. DO NOT use HTML tags like <strong>. Instead, use Markdown syntax like **bold text** for bold text.`;
     
     // Call the Gemini API
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${API_KEY}`, {
@@ -60,10 +60,6 @@ export async function queryLoungeInfo(prompt: string): Promise<string> {
     let responseText = '';
     try {
       responseText = data.candidates[0].content.parts[0].text;
-      
-      // Convert any remaining asterisk bold syntax to HTML strong tags
-      responseText = responseText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-      
       return responseText;
     } catch (e) {
       console.error("Error parsing API response:", e);
