@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import { ChatInput } from "./ChatInput";
 import { ChatMessage, TypingIndicator } from "./ChatMessage";
@@ -34,7 +33,6 @@ export function ChatInterface() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
-  // Smooth scroll to bottom animation
   const scrollToBottom = () => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ 
@@ -44,10 +42,8 @@ export function ChatInterface() {
     }
   };
 
-  // Watch for new messages and scroll smoothly
   useEffect(() => {
     if (messages.length > 0 && !isLoading) {
-      // Use setTimeout to ensure scroll happens after render
       setTimeout(() => {
         scrollToBottom();
       }, 100);
@@ -55,7 +51,6 @@ export function ChatInterface() {
   }, [messages, isLoading]);
 
   const handleSendMessage = async (content: string) => {
-    // Add user message
     const userMessage: ChatMessageType = {
       content,
       isUser: true,
@@ -64,16 +59,13 @@ export function ChatInterface() {
     
     setMessages(prev => [...prev, userMessage]);
     
-    // Scroll to show user message first
     setTimeout(scrollToBottom, 100);
     
     setIsLoading(true);
 
     try {
-      // Get response from AI
       const response = await queryLoungeInfo(content);
       
-      // Add AI response
       const botMessage: ChatMessageType = {
         content: response,
         isUser: false,
@@ -84,7 +76,6 @@ export function ChatInterface() {
     } catch (error) {
       console.error("Error getting response:", error);
       
-      // Add error message
       const errorMessage: ChatMessageType = {
         content: "Sorry, I encountered an error while retrieving that information. Please try again.",
         isUser: false,
@@ -157,6 +148,10 @@ export function ChatInterface() {
         <div className="max-w-3xl mx-auto">
           <ChatInput onSendMessage={handleSendMessage} isDisabled={isLoading} />
         </div>
+      </div>
+      
+      <div className="text-center text-xs text-muted-foreground py-2">
+        Created by Bhoomi
       </div>
     </div>
   );
