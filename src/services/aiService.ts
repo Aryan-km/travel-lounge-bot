@@ -1,4 +1,6 @@
 
+import React from 'react';
+
 // API key will be hardcoded here - replace the placeholder with your actual key
 const API_KEY = "AIzaSyBG88Dc6spqDia9kseXyitK91ht2cQtNZI";
 
@@ -7,6 +9,18 @@ export interface ChatMessage {
   isUser: boolean;
   timestamp: Date;
 }
+
+// Function to clean up HTML tags and convert to Markdown
+const cleanupResponse = (text: string): string => {
+  // Remove HTML tags
+  const cleanedText = text
+    .replace(/<strong>/g, '**')
+    .replace(/<\/strong>/g, '**')
+    .replace(/<br\s*\/?>/g, '\n')
+    .replace(/<\/?\w+[^>]*>/g, '');
+
+  return cleanedText;
+};
 
 export async function queryLoungeInfo(prompt: string): Promise<string> {
   try {
@@ -21,7 +35,7 @@ export async function queryLoungeInfo(prompt: string): Promise<string> {
     - Hours of operation
     - Ratings if available
     
-    Format the response in well-structured Markdown with proper headings, bullet points, and bold text. DO NOT use HTML tags like <strong>. Instead, use Markdown syntax like **bold text** for bold text.`;
+    Format the response in well-structured Markdown with proper headings, bullet points, and bold text. Avoid using HTML tags.`;
     
     // Call the Gemini API
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${API_KEY}`, {
@@ -56,11 +70,10 @@ export async function queryLoungeInfo(prompt: string): Promise<string> {
       return `Error fetching lounge information: ${data.error.message}`;
     }
     
-    // Extract the text from the response
-    let responseText = '';
+    // Extract the text from the response and clean it up
     try {
-      responseText = data.candidates[0].content.parts[0].text;
-      return responseText;
+      const responseText = data.candidates[0].content.parts[0].text;
+      return cleanupResponse(responseText);
     } catch (e) {
       console.error("Error parsing API response:", e);
       console.log("Full API response:", JSON.stringify(data));
@@ -71,3 +84,4 @@ export async function queryLoungeInfo(prompt: string): Promise<string> {
     return "I'm sorry, I encountered an issue while retrieving lounge information. Please try again later.";
   }
 }
+
