@@ -32,15 +32,27 @@ export function ChatInterface() {
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to bottom when messages change
+  // Smooth scroll to bottom animation
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ 
+        behavior: "smooth", 
+        block: "end"
+      });
+    }
   };
 
+  // Watch for new messages and scroll smoothly
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    if (messages.length > 0 && !isLoading) {
+      // Use setTimeout to ensure scroll happens after render
+      setTimeout(() => {
+        scrollToBottom();
+      }, 100);
+    }
+  }, [messages, isLoading]);
 
   const handleSendMessage = async (content: string) => {
     // Add user message
@@ -51,6 +63,10 @@ export function ChatInterface() {
     };
     
     setMessages(prev => [...prev, userMessage]);
+    
+    // Scroll to show user message first
+    setTimeout(scrollToBottom, 100);
+    
     setIsLoading(true);
 
     try {
@@ -112,7 +128,7 @@ export function ChatInterface() {
           </div>
         </Card>
         
-        <ScrollArea className="h-[calc(100%-160px)] pr-4">
+        <ScrollArea className="h-[calc(100%-160px)] pr-4" ref={scrollAreaRef}>
           <div className="max-w-3xl mx-auto space-y-4">
             <div className="flex items-center justify-center my-2">
               <div className="bg-lounge-gradient p-1.5 rounded-full">
@@ -132,7 +148,7 @@ export function ChatInterface() {
               />
             ))}
             {isLoading && <TypingIndicator />}
-            <div ref={messagesEndRef} />
+            <div ref={messagesEndRef} className="h-1" />
           </div>
         </ScrollArea>
       </div>
