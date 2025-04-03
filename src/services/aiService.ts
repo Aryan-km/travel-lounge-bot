@@ -27,7 +27,7 @@ export async function queryLoungeInfo(prompt: string): Promise<string> {
     console.log("Querying with prompt:", prompt);
     console.log("Using API key:", API_KEY ? "API key is set" : "API key is missing");
     
-    // Construct the final prompt to get lounge information
+    // Construct the final prompt to get lounge information with related questions
     const finalPrompt = `Provide detailed information about airport lounges at ${prompt}. Include information about:
     - Available lounges (names, terminals, locations)
     - Access options (credit cards, memberships, pay-per-use)
@@ -35,7 +35,9 @@ export async function queryLoungeInfo(prompt: string): Promise<string> {
     - Hours of operation
     - Ratings if available
     
-    Format the response in well-structured Markdown with proper headings, bullet points, and bold text. Avoid using HTML tags.`;
+    Format the response in well-structured Markdown with proper headings, bullet points, and bold text. Avoid using HTML tags.
+    
+    After providing the lounge information, add a section titled "Related Questions" with 3-4 follow-up questions the user might want to ask about these lounges. Format these as a numbered list.`;
     
     // Call the Gemini API
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${API_KEY}`, {
@@ -84,4 +86,3 @@ export async function queryLoungeInfo(prompt: string): Promise<string> {
     return "I'm sorry, I encountered an issue while retrieving lounge information. Please try again later.";
   }
 }
-
