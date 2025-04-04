@@ -1,11 +1,13 @@
+
 import React, { useState, useRef, useEffect } from "react";
 import { ChatInput } from "./ChatInput";
 import { ChatMessage, TypingIndicator } from "./ChatMessage";
 import { queryLoungeInfo, ChatMessage as ChatMessageType } from "@/services/aiService";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Plane, Clock, Wifi, Coffee, Utensils, Bath, LucideIcon } from "lucide-react";
+import { Plane, Clock, Wifi, Coffee, Utensils, Bath, LucideIcon, Copyright } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 
 type AmenityWidget = {
   icon: LucideIcon;
@@ -21,6 +23,14 @@ const amenityWidgets: AmenityWidget[] = [
   { icon: Clock, label: "24/7 Access", color: "bg-red-500" },
 ];
 
+// Common sample questions to make the interface more interactive
+const sampleQuestions = [
+  "What lounges are available at JFK Airport?",
+  "Do Priority Pass members have access to lounges at Dubai Airport?",
+  "What amenities are offered at the Cathay Pacific lounge in Hong Kong?",
+  "Are there any airport lounges with shower facilities in London Heathrow?",
+];
+
 export function ChatInterface() {
   const [messages, setMessages] = useState<ChatMessageType[]>([
     {
@@ -32,6 +42,7 @@ export function ChatInterface() {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const [selectedAmenity, setSelectedAmenity] = useState<string | null>(null);
 
   const scrollToBottom = () => {
     if (messagesEndRef.current) {
@@ -88,6 +99,15 @@ export function ChatInterface() {
     }
   };
 
+  const handleAmenityClick = (label: string) => {
+    setSelectedAmenity(label);
+    handleSendMessage(`Tell me about ${label} in airport lounges`);
+  };
+
+  const handleSampleQuestionClick = (question: string) => {
+    handleSendMessage(question);
+  };
+
   return (
     <div className="flex flex-col h-full">
       <div className="flex-1 overflow-hidden px-4 py-4">
@@ -96,7 +116,8 @@ export function ChatInterface() {
             {amenityWidgets.map((amenity, index) => (
               <div 
                 key={index} 
-                className="flex flex-col items-center justify-center p-2 rounded-lg bg-card border shadow-sm hover:shadow-md transition-all"
+                className={`flex flex-col items-center justify-center p-2 rounded-lg bg-card border shadow-sm hover:shadow-md transition-all cursor-pointer hover:scale-105 transform ${selectedAmenity === amenity.label ? 'ring-2 ring-primary' : ''}`}
+                onClick={() => handleAmenityClick(amenity.label)}
               >
                 <div className={`w-10 h-10 rounded-full ${amenity.color} flex items-center justify-center text-white mb-2`}>
                   <amenity.icon size={20} />
@@ -107,9 +128,9 @@ export function ChatInterface() {
           </div>
         </div>
         
-        <Card className="p-4 mb-4 border bg-card/50 backdrop-blur-sm">
+        <Card className="p-4 mb-4 border bg-card/50 backdrop-blur-sm hover:bg-card/70 transition-colors">
           <div className="flex items-center space-x-3">
-            <Avatar className="h-10 w-10 bg-lounge-gradient">
+            <Avatar className="h-10 w-10 bg-lounge-gradient animate-pulse-slow">
               <AvatarFallback className="text-white font-bold">LF</AvatarFallback>
             </Avatar>
             <div>
@@ -144,14 +165,29 @@ export function ChatInterface() {
         </ScrollArea>
       </div>
       
-      <div className="p-4 border-t bg-background/80 backdrop-blur-sm sticky bottom-0 mt-auto">
-        <div className="max-w-3xl mx-auto">
+      <div className="p-4 border-t bg-background/95 backdrop-blur-sm sticky bottom-0 mt-auto">
+        <div className="max-w-3xl mx-auto space-y-4">
+          <div className="flex flex-wrap gap-2 justify-center">
+            {sampleQuestions.map((question, index) => (
+              <Button 
+                key={index} 
+                variant="outline" 
+                size="sm" 
+                className="text-xs animate-fade-in" 
+                style={{animationDelay: `${index * 0.1}s`}}
+                onClick={() => handleSampleQuestionClick(question)}
+                disabled={isLoading}
+              >
+                {question}
+              </Button>
+            ))}
+          </div>
           <ChatInput onSendMessage={handleSendMessage} isDisabled={isLoading} />
         </div>
       </div>
       
-      <div className="text-center text-xs text-muted-foreground py-2">
-        Created by Bhoomi
+      <div className="text-center text-xs text-muted-foreground py-2 flex items-center justify-center gap-1">
+        <Copyright className="h-3 w-3" /> Created by Bhoomi
       </div>
     </div>
   );
