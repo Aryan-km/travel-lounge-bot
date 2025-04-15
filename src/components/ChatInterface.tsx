@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import { ChatInput } from "./ChatInput";
 import { ChatMessage, TypingIndicator } from "./ChatMessage";
@@ -8,6 +7,7 @@ import { Plane, Clock, Wifi, Coffee, Utensils, Bath, LucideIcon, Copyright } fro
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { LocationButton } from "./LocationButton";
 
 type AmenityWidget = {
   icon: LucideIcon;
@@ -23,7 +23,6 @@ const amenityWidgets: AmenityWidget[] = [
   { icon: Clock, label: "24/7 Access", color: "bg-red-500" },
 ];
 
-// Common sample questions to make the interface more interactive
 const sampleQuestions = [
   "What lounges are available at JFK Airport?",
   "Do Priority Pass members have access to lounges at Dubai Airport?",
@@ -129,14 +128,17 @@ export function ChatInterface() {
         </div>
         
         <Card className="p-4 mb-4 border bg-card/50 backdrop-blur-sm hover:bg-card/70 transition-colors">
-          <div className="flex items-center space-x-3">
-            <Avatar className="h-10 w-10 bg-lounge-gradient animate-pulse-slow">
-              <AvatarFallback className="text-white font-bold">LF</AvatarFallback>
-            </Avatar>
-            <div>
-              <h3 className="font-medium">Lounge Finder</h3>
-              <p className="text-xs text-muted-foreground">AI-powered lounge recommendations</p>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <Avatar className="h-10 w-10 bg-lounge-gradient animate-pulse-slow">
+                <AvatarFallback className="text-white font-bold">LF</AvatarFallback>
+              </Avatar>
+              <div>
+                <h3 className="font-medium">Lounge Finder</h3>
+                <p className="text-xs text-muted-foreground">AI-powered lounge recommendations</p>
+              </div>
             </div>
+            <LocationButton onSendMessage={handleSendMessage} />
           </div>
         </Card>
         
