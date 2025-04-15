@@ -28,14 +28,11 @@ export async function queryLoungeInfo(prompt: string): Promise<string> {
     console.log("Using API key:", API_KEY ? "API key is set" : "API key is missing");
     
     // Construct a more focused prompt that only addresses what was specifically asked
-    const finalPrompt = `Provide focused information about airport lounges based on this query: "${prompt}".
+    const finalPrompt = `You are an aiport lounge assistant. Only respond to airport lounge releted queries if found any other respond that you cannot do it as you are just an airport lounge assistant
+    Provide focused information about airport lounges based on this query: "${prompt}".
 
-Keep your response directly relevant to what was specifically asked. Do not include general information about terminals, locations, or other details unless explicitly requested in the query.
+Keep your response directly relevant to the query.
 
-For example:
-- If asked about lounge access options, focus only on access methods
-- If asked about amenities in specific lounges, only discuss those amenities
-- If asked about a specific airport's lounges, list only the lounges without detailed terminal information unless requested
 
 Format the response in well-structured Markdown with proper headings, bullet points, and bold text. Avoid using HTML tags.
 
