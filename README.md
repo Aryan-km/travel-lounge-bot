@@ -1,73 +1,71 @@
-# Welcome to your Lovable project
 
-## Project info
+# 🛫 Airport Lounge Finder
 
-**URL**: https://lovable.dev/projects/311a578b-fac4-4efa-bbd5-f2d3dcbe9d2e
+## Overview
 
-## How can I edit this code?
+Airport Lounge Finder is an intelligent, user-friendly web application designed to help travelers quickly and easily find information about airport lounges worldwide. Powered by AI and modern web technologies, this chatbot provides instant, comprehensive insights into airport lounge amenities, access requirements, and location-specific details.
 
-There are several ways of editing your application.
+## 🌟 Features
 
-**Use Lovable**
+- **AI-Powered Lounge Information**: Instant, detailed responses about airport lounges
+- **Geolocation Search**: Find lounges near your current location
+- **Amenity Filters**: Explore lounges by specific amenities like WiFi, buffet, shower facilities
+- **Real-Time Updates**: Daily refreshed lounge information
+- **Responsive Design**: Works seamlessly across devices
+- **Dark/Light Mode**: Adaptive UI for comfortable browsing
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/311a578b-fac4-4efa-bbd5-f2d3dcbe9d2e) and start prompting.
+## 🚀 Technologies Used
 
-Changes made via Lovable will be committed automatically to this repo.
+- React
+- TypeScript
+- Tailwind CSS
+- Shadcn/UI
+- Google Gemini API
+- Geolocation API
+- React Query
+- Recharts
 
-**Use your preferred IDE**
+## 🔧 How It Works
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+1. Type or choose a sample query about airport lounges
+2. Get instant, markdown-formatted responses
+3. Use location button to find nearby lounges
+4. Explore lounges by amenities
+5. Receive related follow-up questions
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🌍 Supported Queries
 
-Follow these steps:
+- Lounges at specific airports
+- Lounge amenities
+- Access requirements
+- Priority Pass information
+- Location-based lounge recommendations
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 📦 Local Setup
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/airport-lounge-finder.git
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Navigate to project directory
+cd airport-lounge-finder
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Install dependencies
+npm install
+
+# Run the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## 🤝 Contributing
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-**Use GitHub Codespaces**
+## 📝 License
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+This project is open-source and available under the MIT License.
 
-## What technologies are used for this project?
+## 🙏 Acknowledgements
 
-This project is built with .
+Created with ❤️ by Bhoomi, powered by Lovable AI
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/311a578b-fac4-4efa-bbd5-f2d3dcbe9d2e) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes it is!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
